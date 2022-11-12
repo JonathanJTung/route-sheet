@@ -3,34 +3,36 @@ import { View, Text, FlatList, ScrollView, StyleSheet } from 'react-native';
 import MealsScreen from './screens/MealsScreen';
 import RoutesScreen from './screens/RoutesScreen';
 
+// Not using NavigationContainer because it has less flexibility
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator } from "react-navigation-stack";
+import { createAppContainer } from "react-navigation";
+import CustomHeader from "../widgets/CustomHeader";
 
-const Stack = createStackNavigator();
-
-export default function MainContainer ({ navigation }) {
-    return (
-        <NavigationContainer independent={true}>
-            <Stack.Navigator>
-                <Stack.Screen 
-                name="Meals List"
-                component={MealsScreen}
-                // options={{ title: "Meals List" }}
-                navigationOptions={navigationOptions}
-                />
-                <Stack.Screen 
-                name="Routes List"
-                component={RoutesScreen}
-                // options={{ title: "Today's Route" }}
-                navigationOptions={navigationOptions}
-                />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
+// There are tons of options for screens, but just using the basic options for now
+const screens = {
+    MealsList: {
+        screen: MealsScreen,
+        navigationOptions: {
+            header: () => {
+                return (
+                    // Will refactor this later, but for now this is the custom header made
+                    <CustomHeader title='Meal List'/>
+                )
+            },
+            headerStyle: {
+                height: 80
+            }
+        }
+    },
+    RoutesList: {
+        screen: RoutesScreen
+    }
 }
 
-const navigationOptions = {
-    title: 'Chat',
-    headerStyle: { backgroundColor: 'red' },
-    headerTitleStyle: { color: 'green' },
+const navigationConfig = {
+    initialRouteName: 'MealsList'
 }
+
+const AppNavigator = createStackNavigator(screens, navigationConfig);
+export default createAppContainer(AppNavigator);
