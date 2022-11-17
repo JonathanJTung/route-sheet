@@ -26,7 +26,18 @@ const screens = {
         }
     },
     RoutesList: {
-        screen: RoutesScreen
+        screen: RoutesScreen,
+        navigationOptions: {
+            header: () => {
+                return (
+                    <CustomHeader title="Today's Route"/>
+                )
+            },
+            headerStyle: {
+                height: 80
+            }
+        }
+
     }
 }
 

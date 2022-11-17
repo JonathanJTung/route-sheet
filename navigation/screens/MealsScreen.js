@@ -8,10 +8,9 @@ import {mealsScreenStyles} from "../../styles/StyleSheetConstants";
 
 function BulletPointText(props) {
     return (
-        <Text>{`\u2022 ${props.text}`}</Text>
+        <Text style={props.style}>{`\u2022 ${props.text}`}</Text>
     )
 }
-
 
 export default function MealsScreen ({ navigation }) {
 
@@ -84,44 +83,47 @@ export default function MealsScreen ({ navigation }) {
     return (
         // Overall Screen
         <SafeAreaView style={mealsScreenStyles.safeArea}>
+
+            {/* The number of clients + hot and cold meals wrapped inside a scrollview */}
             <ScrollView style={mealsScreenStyles.scrollView} contentContainerStyle={{display: 'flex', alignItems: 'center'}}>
                 <View style={mealsScreenStyles.mealsListInnerPadding}>
+                    {/* Count for the number of clients today */}
                     <Text style={[mealsScreenStyles.h3, mealsScreenStyles.clientsText]}>
                         12
                         <Text>
                             {` Clients Today`}
                         </Text>
                     </Text>
+
                     {/* HOT MEALS */}
                     <View style={[mealsScreenStyles.mealsChipContainer, mealsScreenStyles.hotMeals]}>
                         <Text>12 HOT MEALS</Text>
-                        <FlatList
-                            data={hotMeals}
-                            renderItem={
+                        <FlatList data={hotMeals} numColumns={2} renderItem={
                             ({item}) => {
-                                return <BulletPointText text={`${item.quantity} ${item.type.toLowerCase()}`}/>
-                            }
-                        }/>
+                                return <BulletPointText style={mealsScreenStyles.bulletPointText}
+                                    text={`${item.quantity} ${item.type.toLowerCase()}`}/>
+                            }} keyExtractor={item => item.id + item.text + item.quantity + item.type}/>
                     </View>
 
                     {/* COLD MEALS */}
                     <View style={[mealsScreenStyles.mealsChipContainer, mealsScreenStyles.coldMeals]}>
                         <Text>13 COLD BAGS</Text>
-                        <FlatList data={coldMeals} renderItem={
+                        <FlatList data={coldMeals} numColumns={2} renderItem={
                             ({item}) => {
-                                return <BulletPointText text={item.id}/>
-                            }
-                        }/>
+                                return <BulletPointText style={mealsScreenStyles.bulletPointText} text={item.id}/>
+                            }} keyExtractor={ item => item.id + item.quantity + item.text}/>
                     </View>
                 </View>
             </ScrollView>
 
+            {/* Navigate to Route Sheet Button */}
             <Pressable
                 onPress={() => navigation.navigate('RoutesList')}
                 style={mealsScreenStyles.viewRouteButton}
             >
                 <Text style={[mealsScreenStyles.h2, mealsScreenStyles.viewRouteButtonText]}>View Route</Text>
             </Pressable>
+
         </SafeAreaView>
     );
 }

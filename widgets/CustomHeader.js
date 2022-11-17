@@ -21,10 +21,10 @@ const styles = StyleSheet.create(
         },
         text: {
             position: "absolute",
-            fontSize: 30,
+            fontSize: 32,
             fontWeight: '500',
             bottom: 15,
-            left: 20
+            left: 30
         }
     }
 );
