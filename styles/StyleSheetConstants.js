@@ -24,6 +24,10 @@ const defaultStyles = StyleSheet.create({
 
 export const mealsScreenStyles = StyleSheet.create({
     ...defaultStyles,
+    bulletPointText: {
+        flexGrow: 1,
+        width: '50%'
+    },
     mealsListInnerPadding: {
         display: 'flex',
         alignItems: 'center',
@@ -105,7 +109,9 @@ export const routesScreenStyles = StyleSheet.create({
         borderWidth: 2,
         borderColor: 'black',
         paddingTop: 2.5,
-        paddingBottom: 2.5
+        paddingBottom: 2.5,
+        paddingLeft: 8,
+        paddingRight: 8
     },
     routeChip: {
         backgroundColor: '#E6E7E8',
@@ -140,5 +146,17 @@ export const routesScreenStyles = StyleSheet.create({
         borderRadius: 50,
         backgroundColor: '#EF4925',
         marginRight: 5
+    },
+    mealsSummaryBottomDrawer: {
+        position: 'absolute',
+        backgroundColor: '#E6E7E8',
+        borderTopEndRadius: 30,
+        borderTopStartRadius: 30,
+        height: '50%',
+        width: '100%',
+        bottom: 0,
+        elevation: 20,
+        shadowColor: 'black',
+        paddingTop: 30
     }
 })

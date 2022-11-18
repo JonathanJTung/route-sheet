@@ -123,7 +123,6 @@ export default function MealsScreen ({ navigation }) {
             >
                 <Text style={[mealsScreenStyles.h2, mealsScreenStyles.viewRouteButtonText]}>View Route</Text>
             </Pressable>
-
         </SafeAreaView>
     );
 }
